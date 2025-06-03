@@ -44,7 +44,7 @@ def diferencias(lista1, lista2):
 #que nota aprobado. Si es así, el estado será "aprobado", de lo contrario, será "suspenso". La función debe devolver
 #una tupla que contenga la media y el estado
 
-def funcion(lista,nota_aprobado):
+def funcion(lista,nota_aprobado=5):
     estado=""
     media=sum(lista)/len(lista)
     if media >= nota_aprobado:
@@ -96,10 +96,9 @@ def filtrar_mascotas(lista_mascotas):
 #excepción personalizada y maneja el error adecuadamente.
 
 def promedio(l):
-    if len(l)==0:
-        return 'lista vacia'
-    else:
-        return sum(l)/len(l)
+    if len(l) == 0:
+        raise ValueError("La lista está vacía, no se puede calcular el promedio.")
+    return sum(l) / len(l)
     
 #11. Escribe un programa que pida al usuario que introduzca su edad. Si el usuario ingresa un valor no numérico o un
 #valor fuera del rango esperado (por ejemplo, menor que 0 o mayor que 120), maneja las excepciones
@@ -175,7 +174,8 @@ resultado_lambda=lambda lista: [elem for elem in lista if elem % 2 !=0]
 #20. Para una lista con elementos tipo integer y string obtén una nueva lista sólo con los valores int. Usa la función 
 #filter()
 
-solo_enteros = list(filter(lambda x: type(x) == int, lista))
+def solo_enteros(lista):
+    return list(filter(lambda x: isinstance(x, int), lista))
 
 #21. Crea una función que calcule el cubo de un número dado mediante una función lambda
 cubo = lambda x: x**3
@@ -202,7 +202,7 @@ def diferencia_total(lista):
 
 #25. Crea una función que cuente el número de caracteres en una cadena de texto dada
 
-def contar(cadena):
+def contar_palabras(cadena):
     lista_palabras=cadena.split()
     return len(lista_palabras)
 
@@ -246,7 +246,7 @@ def buscar():
     if nombre in nombres:
         print("Nombre encontrado.")
     else:
-        print("Nombre NO encontrado."
+        print("Nombre NO encontrado.")
 
 #32. Crea una función que tome un nombre completo y una lista de empleados, busque el nombre completo en la lista y
 #devuelve el puesto del empleado si está en la lista, de lo contrario, devuelve un mensaje indicando que la persona
@@ -286,7 +286,7 @@ Caso de uso:
 """
 
 class Arbol:
-    def __init__(self,tronco,ramas):
+    def __init__(self):
         self.tronco=1
         self.ramas=[]
     
@@ -307,7 +307,7 @@ class Arbol:
         return {
             "longitud_tronco": self.tronco,
             "numero_ramas": len(self.ramas),
-            "longitudes_ramas": self.ramas
+            "longitudes_ramas": self.ramas}
     
 """"
     36. Crea la clase UsuarioBanco ,representa a un usuario de un banco con su nombre, saldo y si tiene o no cuenta
@@ -330,13 +330,12 @@ PROYECTO LÓGICA: Katas de Python 3
 """
 
 class UsuarioBanco:
-    def __init__(self,nombre,saldo,cuenta):
-        self.nombre=nombre
-        self.saldo=saldo
-        self.cuenta=cuenta # True o False indica si tiene cuenta corriente
+    def __init__(self, nombre, saldo, cuenta):
+        self.nombre = nombre
+        self.saldo = saldo
+        self.cuenta = cuenta  # True o False indica si tiene cuenta corriente
 
-    
-       def retirar_dinero(self, cantidad):
+    def retirar_dinero(self, cantidad):
         if cantidad > self.saldo:
             raise ValueError(f"{self.nombre} no tiene suficiente saldo para retirar {cantidad} unidades.")
         self.saldo -= cantidad
